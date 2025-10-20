@@ -139,14 +139,29 @@ git push origin main
 ```
 
 ### 3. Variáveis Railway
-- `DATABASE_URL` (automático com PostgreSQL plugin)
-- `JWT_SECRET`
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
-- `GOOGLE_SHEET_ID`
-- `WAHA_API_KEY`
-- `FRONTEND_URL`
-- `VITE_API_URL`
+**Configure no painel Railway > Settings > Variables:**
+
+```bash
+# Database (Railway cria automaticamente com PostgreSQL plugin)
+DATABASE_URL=postgresql://usuario:senha@host:porta/database
+
+# JWT Secret (gere uma chave segura)
+JWT_SECRET=sua_chave_secreta_jwt_aqui
+
+# Google Sheets API (configure no Google Cloud Console)
+GOOGLE_CLIENT_ID=seu_google_client_id
+GOOGLE_CLIENT_SECRET=seu_google_client_secret
+GOOGLE_SHEET_ID=seu_google_sheet_id
+
+# Waha API (futuro)
+WAHA_API_KEY=sua_waha_api_key
+
+# Server
+PORT=3001
+NODE_ENV=production
+```
+
+**⚠️ IMPORTANTE:** Sem essas variáveis, o sistema não iniciará!
 
 ## Funcionalidades
 
