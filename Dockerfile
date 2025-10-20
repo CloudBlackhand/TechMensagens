@@ -6,29 +6,29 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-# Copiar package.json do workspace
-COPY package.json ./
+# Copiar e instalar shared primeiro
 COPY shared/package*.json ./shared/
-COPY backend/package*.json ./backend/
-
-# Instalar dependências
+WORKDIR /app/shared
 RUN npm install
 
-# Copiar código fonte
-COPY shared/ ./shared/
-COPY backend/ ./backend/
-
-# Build do shared primeiro
-WORKDIR /app/shared
+# Copiar código do shared
+COPY shared/ ./
 RUN npm run build
 
-# Build do backend
+# Voltar para diretório raiz
+WORKDIR /app
+
+# Copiar e instalar backend
+COPY backend/package*.json ./backend/
 WORKDIR /app/backend
+RUN npm install
+
+# Copiar código do backend
+COPY backend/ ./
 RUN npm run build
 
 # Expor porta
 EXPOSE 3001
 
 # Comando de inicialização
-WORKDIR /app/backend
 CMD ["npm", "start"]
